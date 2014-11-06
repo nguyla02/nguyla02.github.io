@@ -1,10 +1,9 @@
 
-      h1,h2,h3,h4 {
-      font-size: 28pt;
-      }
-      h1,h3 {
-          color: lightpurple;
-      }
-      h2,h4 {
-          color: lightorange;
-      }
+h1,h2,h3,h4 {
+font-size: 28pt;}
+
+h1,h3 {
+color: purple;}
+
+h2,h4 {
+color: orange;}
