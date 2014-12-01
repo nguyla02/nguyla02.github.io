@@ -54,8 +54,24 @@
 
 <body>
 
+<script type="text/javascript">
+   counter = 0;
+   updateCounter = functon(cbId) {
+      theCheckbox = document.querySelector("#"+cbId);
+      if (theCheckbox.checked){
+         counter = counter + 1;
+      }
+      else {
+         counter = counter - 1;
+      }
+      countSpot = document.querySelector('#myCounter');
+      countSpot.innerHTML = "Correct: "+ counter;
+   }
+   
+</script>
+
 <nav id = a>
-<input type = "checkbox" onClick="onClick()"</button>
+<input id="cb1" type = "checkbox" onclick="updateCounter(\"cb1\");"</button>
 <section  class="question">
    <p> Who is the best music band in history? </p>   
 </section>
@@ -67,7 +83,7 @@
 
 
 <nav id = b>
-<input type = "checkbox" onClick="onClick()"</button>
+<input id="cb2" type = "checkbox" onclick="updateCounter(\"cb2\");"</button>
 <section class="question">
    <p> Who is the best diva ever? </p>   
 </section>
@@ -79,7 +95,7 @@
 
 
 <nav id = b>
-<input type = "checkbox" onClick="onClick()"</button>
+<input id="cb3" type = "checkbox" onclick="updateCounter(\"cb3\");"</button>
 <section class="question">
    <p> Who is the king of Rock&Roll? </p>   
 </section>
@@ -91,7 +107,7 @@
 
 
 <nav id = b>
-<input type = "checkbox" onClick="onClick()"</button>
+<input id="cb4" type = "checkbox" onclick="updateCounter(\"cb4\");"</button>
 <section class="question">
    <p> Who is the king of POP? </p>   
 </section>
@@ -101,18 +117,6 @@
 </br>
 </nav>
 
-<article class = "count">
-<h2> How many ? </h2>
-<script type="text/javascript">
-    var howmany = 0;
-    function onClick() {
-        howmany = howmany + 1;
-        document.getElementById("howmany").innerHTML = howmany;
-    };
-    </script>
-    <p>The number of Correct answers: <a id="howmany">0</a></p>  
-   
-</article>
  
 </body>
 </html>
