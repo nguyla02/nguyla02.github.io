@@ -5,36 +5,20 @@
       <img src="http://cdn0.dailydot.com/cache/6c/b4/6cb48f9a3ed3a9a3eabc567cb5099260.jpg">
    </head>
       <body>
-         <h1 class="class4"> Shopping Zone </h1>
-         
-         <h2> Clothes <h2>
-         <ul>
-         <li class="class1"> <strike> Shirt </strike> &#x2714 </li>
-         <li class="class1"> Pants </li>
-         <li class="class1"> Sweaters </li>
-         <li class="class1"> <strike> Sneakers </strike> &#x2714 </li>
-         </ul>
-         
-         <h2> Food <h2>
-         <ul>
-         <li class="class2"> Rice </li>
-         <li class="class2"> Noodle </li>
-         <li class="class2"> Vegetables </li>
-         <li class="class2"> <strike> Beef </strike> &#x2714 </li>
-         </ul>
-         
-         <h2> Furniture <h2>
-         <ul>
-         <li class="class3"> <strike> Bookshelves </strike> &#x2714 </li>
-         <li class="class3"> Desk  </li>
-         <li class="class3"> Chair </li>
-         </ul>
-         
-         <h2> School Stuffs <h2>
-         <ul>
-         <li class="class4"> <strike> Notebooks </strike> &#x2714 </li>
-         <li class="class4"> Pencils </li>
-         <li class="class4"> Rulers </li>
-         </ul>
+         <form runat="server">   
+         <asp:TextBox id="txt1" runat="server" />
+         <asp:Button onclick="addItem" Text="Submit" runat="server" />
+         <p><asp:Label id="lbl1" runat="server" /></p>
+         Search you item here:
+         <asp:TextBox id="tb1" runat="server" />
+         <br /><br />
+         <button onclick = "addItem();"> Add item </button>
+         <script type="text/javascript">
+            addItem = function(){
+               
+            }
+            
+         </script>
+         </form>
       </body>
 </html>      
