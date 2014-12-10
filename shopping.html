@@ -19,6 +19,7 @@
       </style>
    </head>
       <body>
+      <h1> The Shopphing List </h1>
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
@@ -50,13 +51,13 @@
       myli.onclick=clickon;
       myUL.appendChild(myli);
       myTextbox.value=""
-      if (myCategory = "Meat") {
+      if (myCategory = "meat") {
          theColor = red;
       }
       document.body.style.color = theColor;
       }
       checkme=function(myCategory) {
-      if(myCategory="Meat") {
+      if(myCategory="meat") {
          myTextbox.style.type="#meat";
       }
       }
