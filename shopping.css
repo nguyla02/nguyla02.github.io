@@ -1,11 +1,12 @@
-.class1 {
-background-color: lightgreen;}
-.class2 {
-background-color: lightblue;}
-.class3 {
-background-color: pink;}
-.class4 {
-background-color: orange;}
+.meat {
+color: red;}
+.vegetables {
+color: green;}
+.snacks {
+color: blue;}
+.sauce {
+color: orange;}
+
 body{
   background-color: yellow;
 }
