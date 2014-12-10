@@ -3,41 +3,59 @@
    <head>
       <title> Shopping Zone </title>
       <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4Ba9UpE0LHnvEPhglQhX7Vj95cF1daNz1UAuts82Q4sBaLEfs"> <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS44B2CW0Td1y6J0V8GAV8lTVPDnsyPZ7Xta0_os8M42yk7YPUk"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4-3gt1CgLbJrwfDX0R7IgfqGYkjA-RroXpXgUaCJYBJXq4FsEA"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRURZTn3sAguE9VYPJcgOBfjL18jdul8BwOTITis9okM_fstbeCag">
+      <style>
+      #meat {
+         color: red;
+      }
+      #vegetables {
+         color: green;
+      }
+      #snacks {
+         color: blue;
+      }
+      #sauce {
+         color: orange;
+      }
+      </style>
    </head>
       <body>
-      <h1> The Shopping List </h1>
-      <main>
-         <ul id="grocerylist"> </ul>
-      </main>
-      <lable for="item"> Search your items here </lable>
-      <input id="item" type="text"/>
-      <lable> Types </lable>
-
-      <select id="types">
+      <table id="grocerylist"></table>
+      <lable for="item"> Search your item: </lable>
+      <input id="item" type="text"/> 
+      <lable> Types: </lable>
+      <select id="category">
          <option id="meat"> Meat </option>
-         <option id="vegetables"> Vegetable </option>
+         <option id="vegetables"> Vegetables </option>
          <option id="snacks"> Snacks </option>
          <option id="sauce"> Sauce </option>
       </select>
       <button onclick="addItem()"> Add Item </button>
       <script>
-
-         addItem= function() {
-            myUL=document.querySelector('#grocerylist');
-            myTextbox=document.querySelector('#item');
-            myli=document.createElement('li');
-            myli.type="none";
-            myItem=document.createTextNode(myTextbox.value);
-            myCategory=document.querySelector('#types');
-            myCheckbox=document.createElement('input');
-            myCheckbox.type="checkbox";
+      clickon= function(){
+      myCategory=this.classname;
+      }
+      addItem= function() {
+      myUL=document.querySelector('#grocerylist');
+      myTextbox=document.querySelector('#item');
+      myli=document.createElement('li');
+      myli.type="none";
+      myItem=document.createTextNode(myTextbox.value);
+      myCategory=document.querySelector('#category');
+      myCheckbox=document.createElement('input');
+      myCheckbox.type="checkbox";
     
-            myItem.style=('#types');
-            myli.appendChild(myCheckbox);
-            myli.appendChild(myItem);
-            myli.onclick=clickon;
-            myUL.appendChild(myli);
-            myTextbox.value="";
-         }
-      </body>
-</html>      
+      myItem.style=('#category');
+      myli.appendChild(myCheckbox);
+      myli.appendChild(myItem);
+      myli.onclick=clickon;
+      myUL.appendChild(myli);
+      myTextbox.value=""
+      }
+      checkme=function(myCategory) {
+      if(myCategory="Meat") {
+         myTextbox.style.type="#meat";
+      }
+      }
+   </script>
+   </body>
+</html>
