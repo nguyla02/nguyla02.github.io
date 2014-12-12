@@ -18,49 +18,42 @@
       }
       </style>
    </head>
-      <body>
+   <body>
       <h1> The Shopphing List </h1>
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
       <lable> Types: </lable>
       <select id="category">
-         <option id="meat"> Meat </option>
-         <option id="vegetables"> Vegetables </option>
-         <option id="snacks"> Snacks </option>
-         <option id="sauce"> Sauce </option>
+         <option value="meat"> Meat </option>
+         <option value="vegetables"> Vegetables </option>
+         <option value="snacks"> Snacks </option>
+         <option value="sauce"> Sauce </option>
       </select>
       <button onclick="addItem()"> Add Item </button>
       <script>
-      clickon= function(){
-      myCategory=this.classname;
-      }
-      addItem= function() {
-      myUL=document.querySelector('#grocerylist');
-      myTextbox=document.querySelector('#item');
-      myli=document.createElement('li');
-      myli.type="none";
-      myItem=document.createTextNode(myTextbox.value);
-      myCategory=document.querySelector('#category');
-      myCheckbox=document.createElement('input');
-      myCheckbox.type="checkbox";
-    
-      myItem.style=('#category');
-      myli.appendChild(myCheckbox);
-      myli.appendChild(myItem);
-      myli.onclick=clickon;
-      myUL.appendChild(myli);
-      myTextbox.value=""
-      if (myCategory = "meat") {
-         theColor = red;
-      }
-      document.body.style.color = theColor;
-      }
-      checkme=function(myCategory) {
-      if(myCategory="meat") {
-         myTextbox.style.type="#meat";
-      }
-      }
-   </script>
+         clickon= function(){
+            myCategory=this.classname;
+         }
+         addItem= function() {
+            myUL=document.querySelector('#grocerylist');
+            myTextbox=document.querySelector('#item');
+            myli=document.createElement('li')
+            myli.type="none";
+            myItem=document.createElement('span')
+            myItem.innerHTML += myTextbox.value;
+            myCategory=document.querySelector('#category');
+            myCheckbox=document.createElement('input');
+            myCheckbox.type="checkbox";
+            myItem.id = myCategory.value;
+            myli.appendChild(myCheckbox);
+            myli.appendChild(myItem);
+            myli.onclick=clickon;
+            myUL.appendChild(myli);
+            myTextbox.value=""
+            
+            document.body.style.color = theColor;
+         }
+      </script>
    </body>
 </html>
