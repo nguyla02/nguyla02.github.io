@@ -34,6 +34,12 @@
       <script>
          clickon= function(){
             myCategory=this.classname;
+            updateBuy = function(cbId) {
+            theCheckbox = document.querySelector("#"+cbId);
+            if (theCheckbox.checked){
+               myli.style.text-decoration: line-through;
+            }
+         }
          }
          addItem= function() {
             myUL=document.querySelector('#grocerylist');
