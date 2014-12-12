@@ -4,6 +4,7 @@
       <title> Shopping Zone </title>
       <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4Ba9UpE0LHnvEPhglQhX7Vj95cF1daNz1UAuts82Q4sBaLEfs"> <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS44B2CW0Td1y6J0V8GAV8lTVPDnsyPZ7Xta0_os8M42yk7YPUk"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4-3gt1CgLbJrwfDX0R7IgfqGYkjA-RroXpXgUaCJYBJXq4FsEA"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRURZTn3sAguE9VYPJcgOBfjL18jdul8BwOTITis9okM_fstbeCag">
       <style>
+      }
       #meat {
          color: red;
       }
@@ -16,10 +17,13 @@
       #sauce {
          color: orange;
       }
+      .done{
+         text-decoration: line-through;
+      }
       </style>
    </head>
    <body>
-      <h1> The Shopping List ~</h1>
+      <h1> The Shopping List </h1>
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
@@ -45,14 +49,22 @@
             myCategory=document.querySelector('#category');
             myCheckbox=document.createElement('input');
             myCheckbox.type="checkbox";
+            myCheckbox.onclick = "checkme()";
             myItem.id = myCategory.value;
             myli.appendChild(myCheckbox);
             myli.appendChild(myItem);
             myli.onclick=clickon;
             myUL.appendChild(myli);
             myTextbox.value=""
-            
             document.body.style.color = theColor;
+         }
+         checkme = function(){
+            if (this.checked){
+               this.parentNode.clearList.add("'done");
+            }
+            else{
+               this.parentNode.clearList.remove("done");
+            }
          }
       </script>
    </body>
