@@ -22,7 +22,7 @@
       </style>
    </head>
    <body>
-      <h1> The Shopping List ~ </h1>
+      <h1> The Shopping List  </h1>
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
@@ -41,21 +41,26 @@
          addItem= function() {
             myUL=document.querySelector('#grocerylist');
             myTextbox=document.querySelector('#item');
+            myCategory = document.querySelector('#category').value;
+            
             myli=document.createElement('li')
             myli.type="none";
-            myItem=document.createElement('span')
-            myItem.innerHTML += myTextbox.value;
-            myCategory=document.querySelector('#category');
+            myli.classList.add(myCategory);
+            
+            myItem = document.createTextNode(myTextbox.value);
+            myTextbox.value = "";
+            
             myCheckbox=document.createElement('input');
             myCheckbox.type="checkbox";
             myCheckbox.onclick = checkme;
-            myItem.id = myCategory.value;
+            
+            ;
             myli.appendChild(myCheckbox);
             myli.appendChild(myItem);
             myli.onclick=clickon;
             myUL.appendChild(myli);
             myTextbox.value=""
-            document.body.style.color = theColor;
+            
          }
          checkme = function(){
             if (this.checked){
