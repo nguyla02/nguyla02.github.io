@@ -48,7 +48,7 @@
             myCategory=document.querySelector('#category');
             myCheckbox=document.createElement('input');
             myCheckbox.type="checkbox";
-            myCheckbox.onclick = "checkme()";
+            myCheckbox.onclick = checkme;
             myItem.id = myCategory.value;
             myli.appendChild(myCheckbox);
             myli.appendChild(myItem);
@@ -59,10 +59,10 @@
          }
          checkme = function(){
             if (this.checked){
-               this.parentNode.clearList.add("'done");
+               this.parentNode.classList.add("'done");
             }
             else{
-               this.parentNode.clearList.remove("done");
+               this.parentNode.classList.remove("done");
             }
          }
       </script>
