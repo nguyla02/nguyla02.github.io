@@ -1,76 +1,91 @@
-<html>
-<link rel="stylesheet" href="shopping.css" type="text/css">
-   <head>
-      <title> Shopping Zone </title>
-      <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4Ba9UpE0LHnvEPhglQhX7Vj95cF1daNz1UAuts82Q4sBaLEfs"> <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS44B2CW0Td1y6J0V8GAV8lTVPDnsyPZ7Xta0_os8M42yk7YPUk"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4-3gt1CgLbJrwfDX0R7IgfqGYkjA-RroXpXgUaCJYBJXq4FsEA"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRURZTn3sAguE9VYPJcgOBfjL18jdul8BwOTITis9okM_fstbeCag">
-      <style>
-      #meat {
-         color: red;
-      }
-      #vegetables {
-         color: green;
-      }
-      #snacks {
-         color: blue;
-      }
-      #sauce {
-         color: orange;
-      }
-      .done{
-         text-decoration: line-through;
-      }
-      </style>
-   </head>
-   <body>
-      <h1> The Shopping List  </h1>
-      <table id="grocerylist"></table>
-      <lable for="item"> Search your item: </lable>
-      <input id="item" type="text"/> 
-      <lable> Types: </lable>
-      <select id="category">
-         <option value="meat"> Meat </option>
-         <option value="vegetables"> Vegetables </option>
-         <option value="snacks"> Snacks </option>
-         <option value="sauce"> Sauce </option>
-      </select>
-      <button onclick="addItem()"> Add Item </button>
-      <script>
-         clickon= function(){
-            myCategory=this.classname;
-         }
-         addItem= function() {
-            myUL=document.querySelector('#grocerylist');
-            myTextbox=document.querySelector('#item');
-            myCategory = document.querySelector('#category').value;
+    <html>
+<head>
+<link rel="stylesheet" href="shop.css" type="text/css">
+<title>Shopping List</title>
+<style>
+ .Meat {
+  color: red;
+ }
+ .Vegetable {
+  color: green;
+ }
+ .Beauty {
+  color: orange;
+ }
+ .Entertainment {
+  color: blue;
+ }
+ .done {
+  
+  text-decoration:line-through;
+ }
+</style>
+</head>
+<h1>Shopping list</h1>
+<body>
+<table id="grocerylist"></table>
+ 
+  
             
-            myli=document.createElement('li')
-            myli.type="none";
-            myli.classList.add(myCategory);
-            
-            myItem = document.createTextNode(myTextbox.value);
-            myTextbox.value = "";
-            
-            myCheckbox=document.createElement('input');
-            myCheckbox.type="checkbox";
-            myCheckbox.onclick = checkme;
-            
-            ;
-            myli.appendChild(myCheckbox);
-            myli.appendChild(myItem);
-            myli.onclick=clickon;
-            myUL.appendChild(myli);
-            myTextbox.value=""
-            
-         }
-         checkme = function(){
-            if (this.checked){
-               this.parentNode.classList.add("'done");
-            }
-            else{
-               this.parentNode.classList.remove("done");
-            }
-         }
-      </script>
-      <script src="grocery.js" type="text/javascript"><</script>
-   </body>
+          
+<lable for="item">Item:</lable>
+<input id="item" type="text"/>
+<lable> Category:</lable>
+
+<select id="category">
+  <option>Meat</option>
+  <option>Vegetable</option>
+  <option>Beauty</option>
+  <option>Entertainment</option>
+</select>
+<button onclick="addItem()">Add</button>
+<script type="text/javascript">
+    window.onload=function() {
+        restoreList('grocerylist',donefunc);
+    }
+        
+    </script>
+<script src="http://reputablejournal.com/CS130/listsaver.js" type="text/javascript">
+    
+</script>
+<script>
+
+  addItem= function() {
+    myUL=document.querySelector('#grocerylist');
+    myTextbox=document.querySelector('#item');
+    myCategory=document.querySelector('#category').value;
+    
+    
+    myli=document.createElement('li');
+    myli.type="none";
+    myli.classList.add(myCategory);
+    \\myli.className=myCategory;
+    
+    
+    myItem=document.createTextNode(myTextbox.value);
+    myTextbox.value="";
+    
+    myCheckbox=document.createElement('input');
+    myCheckbox.type="checkbox";
+    myCheckbox.onclick=checkme;
+    
+    myli.appendChild(myCheckbox);
+    myli.appendChild(myItem);
+    myUL.appendChild(myli);
+    
+    localSave("grocerylist")
+  }
+  checkme=function() {
+   
+    if(this.checked) 
+    {this.parentNode.classList.add("done");
+     }
+    else
+    {this.parentNode.classList.remove("done");
+     }
+    
+   }
+  
+</script>
+</body>
 </html>
