@@ -39,15 +39,7 @@
   <option>Entertainment</option>
 </select>
 <button onclick="addItem()">Add</button>
-<script type="text/javascript">
-    window.onload=function() {
-        restoreList('grocerylist',donefunc);
-    }
-        
-    </script>
-<script src="http://reputablejournal.com/CS130/listsaver.js" type="text/javascript">
-    
-</script>
+
 <script>
 
   addItem= function() {
@@ -73,7 +65,6 @@
     myli.appendChild(myItem);
     myUL.appendChild(myli);
     
-    localSave("grocerylist")
   }
   checkme=function() {
    
