@@ -76,7 +76,33 @@
             else{
                this.parentNode.classList.remove("done");
             }
-            
+            localSave()
+         }
+         localSave = function(){
+            var res = [];
+            var i;
+            allEntries = document.querySelectorAll('myli')
+            for(i=0; i< allEntries.length; i++)
+            {
+               if(! allEntries[i].classList.contains("done"))
+               {
+                  res.push(allEntries[i].innerText);
+               }
+            }
+            localStorage.setItem("todoDatabase",JSON.stringify(res))
+         }
+         restoreList = function(){
+            allEntries = JSON.parse(localStorage.getItem('todoDatabase'))
+            	for (i=0; i < allEntries.length; i++){
+	            myUL = document.querySelector("#grocerylist");
+	            myli = document.createElement('myli');
+	            myCheckbox= document.createElement("input");
+	            myCheckbox.type = 'checkbox';
+	            myCheckbox.onclick = doneTask;	
+	            myli.appendChild(myCheckbox);
+	            t= document.createTextNode(allEntries[i]);
+	            myli.appendChild(t);
+	            myUL.appendChild(myli);
          }
       </script>
       
