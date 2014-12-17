@@ -28,7 +28,7 @@
       </style>
    </head>
    <body>
-      <h1> The Shopping List </h1>
+      <h1> The Shopping List ~ </h1>
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
@@ -70,7 +70,6 @@
             
          }
          
-         <script>
          var checkme = function(){
             if (this.checked){
                this.parentNode.classList.add("done");
@@ -80,14 +79,12 @@
             }
             localSave()
          }
-         
       </script>
       
-      <script> 
+            <script> 
       window.onload=function() {
             restoreList('grocerylist',checkme);
             } 
-               
-      </script>
+            </script>
    </body>
 </html>
