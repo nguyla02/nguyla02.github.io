@@ -1,5 +1,6 @@
 <html>
 <link rel="stylesheet" href="shopping.css" type="text/css">
+<script src="http://reputablejournal.com/CS130/listsaver.js" type="text/javascript"> </script>
    <head>
       <title> Shopping Zone </title>
       <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4Ba9UpE0LHnvEPhglQhX7Vj95cF1daNz1UAuts82Q4sBaLEfs"> <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS44B2CW0Td1y6J0V8GAV8lTVPDnsyPZ7Xta0_os8M42yk7YPUk"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4-3gt1CgLbJrwfDX0R7IgfqGYkjA-RroXpXgUaCJYBJXq4FsEA"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRURZTn3sAguE9VYPJcgOBfjL18jdul8BwOTITis9okM_fstbeCag">
@@ -64,6 +65,7 @@
             myli.appendChild(myItem);
             myUL.appendChild(myli);
             myTextbox.value=""
+            localSave("grocerylist")
             
          }
          var checkme = function(){
@@ -73,8 +75,11 @@
             else{
                this.parentNode.classList.remove("done");
             }
+            window.onload=function() {
+            restoreList('grocerylist',checkme);
+            }
          }
       </script>
-      <script src="grocery.js" type="text/javascript"><</script>
+      
    </body>
 </html>
