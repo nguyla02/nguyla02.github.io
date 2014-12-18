@@ -29,7 +29,6 @@
    </head>
    <body>
       <h1> The Shopping List ~ </h1>
-      
       <table id="grocerylist"></table>
       <lable for="item"> Search your item: </lable>
       <input id="item" type="text"/> 
@@ -70,34 +69,6 @@
             localSave("grocerylist");
             
          }
-         localSave = function() {
-	         var res = []
-	         var i;
-	         allEntries = document.querySelectorAll('myli')
-	         for(i=0; i < allEntries.length; i++) {
-		          if (! allEntries[i].classList.contains("done")) {
-		          res.push(allEntries[i].innerText);
-		          }
-       	    }
-
-	          localStorage.setItem("todoDatabase",JSON.stringify(res))
-          }
-          
-          restoreTask = function () {
-	       allEntries = JSON.parse(localStorage.getItem('todoDatabase'))
-	       for (i=0; i < allEntries.length; i++){
-	           myUL = document.querySelector("#grocerylist");
-	           myli = document.createElement('myli');
-	           myCheckbox= document.createElement("input");
-	           myCheckbox.type = 'checkbox';
-	           myCheckbox.onclick = doneTask;	
-	           myli.appendChild(cb);
-	           t= document.createTextNode(allEntries[i]);
-	           myli.appendChild(t);
-	           myUL.appendChild(li);
-	       }
-	
-          }
          
          var checkme = function(){
             if (this.checked){
@@ -108,6 +79,7 @@
             }
             localSave()
          }
+
       </script>
       
             <script> 
