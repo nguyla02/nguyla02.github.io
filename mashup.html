@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<style>
+		body {
+			background: darkgrey; 
+			margin: 0;
+			padding-bottom: 0;
+			overflow: scroll;
+		}
+		div {
+			display: block;
+		}
+		#container {
+			border: solid 5px black;
+			position: relative;
+			top: 50px;
+		}
+		#header h1 {
+			margin: 0;
+			height: 20px;
+			font-size: 20px;
+			}
+		#header {
+			width:100%;
+			height: 40px;
+			background-color: grey;
+			
+			position:fixed;
+			z-index:1;
+			text-align: center;
+			
+		}
+		#searchbar {
+			width: 100%;
+			background: grey;
+			height: 30px;
+			display:block;
+			position: fixed;
+			top: 20px;	
+			z-index: 1;
+			text-align: center;
+		}
+		#container #wiki {
+			width: 100%;
+			background: clear;
+			height: 200;
+			overflow: scroll;
+		}
+		#container #vidbar {
+			width:100%;
+			height: 200px;
+			overflow: scroll;
+		}
+		#container #viewbox {
+			background: clear;
+			width: 100%;	
+			min-width: 640px;
+			min-height: 390px;
+			height: 420px;
+			text-align: center;
+		}
+		#player {
+		}
+		#login-link {
+			display: none;
+			}
+		.thumbs {
+				text-align: center;
+		}
+		.theseVids {
+			display: inline;
+			padding-top: 5px;
+			width: 20%;
+			float: left;
+			height: 90%;
+			text-align: center;
+		}
+		.theseVids:hover {
+			background: white;
+			}
+		.error {
+			width: 100%;
+			text-align: center;
+		}
+		.wikiResults{
+			height: 8px;
+		background-color: rgb(255, 100, 127);
+		text-align: center;
+		padding: 15px;
+		margin: 5px auto;
+		width: 5%;
+	}
+		.wikiResults:hover{
+		background-color: rgb(107, 255, 124);
+		}
+	</style>
+	<script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="apps.js"></script>
+	
+</head>
+<body>
+<div id='header'> 
+	<h1> Wiki-Tube! </h1>
+	</div>
+<div id='searchbar'> 
+	<div id="buttons">
+      	<label> <input id="query" value='' type="text"/><button id="search-button" disabled onclick="search();">Search</button></label>
+        <button id='login-link'> Click Me to Login</button>
+    </div>
+</div>
+<div id="container">
+<div id= 'wiki' height='200'> 
+	<!--<form id="s-form">
+	<input type="text" style="width: 300px" />
+	<button type="button">Искать</button>
+	</form>-->
+	<div style="font-size: 12px; font-family: 'Arial'; width: 100%; border: 1px solid black; padding: 20px; overflow: scroll;" id="content"></div>
+	
+	
+</div>
+<div id='vidbar'> 
+</div>
+<div id='viewbox'> 
+<iframe id="player" width='640' height='390' src=" " frameborder="0"> </iframe>
+</div>
+</div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+	<script src="search.js"> </script>
+    <script src="auth.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</body>
+</html>
