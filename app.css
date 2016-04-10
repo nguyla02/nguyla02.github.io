@@ -1,0 +1,42 @@
+html{
+margin: 0;
+padding: 0;
+background-color: white;
+font-family: 'Helvetica', Geneva, Verdana, Arial, sans-serif;
+font-size: 10px;
+}
+input{
+font-size: 8px;
+line-height: 10px;
+height: 15px;
+}
+button{
+text-align: center;
+font-weight: bold;
+font-size: 10px;
+height: 15px;
+width: 25px;
+margin-top: 10px;
+border: 2px none;
+border-radius: 10px;
+}
+button:hover{
+background-color: rgb(76, 126, 242);
+color: white;
+}
+#searchTerm{
+width: 10%;
+text-align: center;
+margin: 5px auto;
+}
+.wikiResults{
+	height: 8px;
+background-color: rgb(255, 100, 127);
+text-align: center;
+padding: 15px;
+margin: 5px auto;
+width: 5%;
+}
+.wikiResults:hover{
+background-color: rgb(107, 255, 124);
+}
