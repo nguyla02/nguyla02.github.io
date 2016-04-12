@@ -1,0 +1,85 @@
+	
+		body {
+			background: darkgrey; 
+			margin: 0;
+			padding-bottom: 0;
+			overflow: scroll;
+		}
+	
+		#container {
+			border: solid 5px black;
+			position: relative;
+			top: 50px;
+		}
+		#header h1 {
+			margin: 0;
+			height: 20px;
+			font-size: 20px;
+			}
+		#header {
+			width:100%;
+			height: 40px;
+			background: grey;
+			position:fixed;
+			z-index:1;
+			text-align: center;
+		}
+		#searchbar {
+			width: 100%;
+			background: grey;
+			height: 30px;
+			display:block;
+			position: fixed;
+			top: 20px;	
+			z-index: 1;
+			text-align: center;
+		}
+		#container #wiki {
+			width: 100%;
+			background: white;
+			height: 200;
+		
+			
+		}
+		#container #box {
+			width: 300px;
+			border: 1px solid
+			
+			
+		}
+		#container #vidbar {
+			width:100%;
+			height: 200px;
+			overflow: scroll;
+		}
+		#container #viewbox {
+			background: clear;
+			width: 100%;	
+			min-width: 640px;
+			min-height: 390px;
+			height: 420px;
+			text-align: center;
+		}
+		#player {
+		}
+		#login-link {
+			display: none;
+			}
+		.thumbs {
+				text-align: center;
+		}
+		.theseVids {
+			display: inline;
+			padding-top: 5px;
+			width: 20%;
+			float: left;
+			height: 90%;
+			text-align: center;
+		}
+		.theseVids:hover {
+			background: white;
+			}
+		.error {
+			width: 100%;
+			text-align: center;
+		}
