@@ -301,6 +301,31 @@
            /*var theVideoUrl="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
 
         });
+	  var q = $('#query').val();
+	  var request = gapi.client.youtube.search.list({
+	    type: 'video',
+	    q: q,
+	    part: 'snippet' 
+	  });
+	
+	  request.execute(function(response) {
+	    if ('error' in response) {
+	      var vidbar = document.getElementById("vidbar");
+	      var entry = document.createElement("div");
+	      var text = document.createTextNode("Error: invalid search. Please search another topic.");
+	      entry.className = "error";
+	      entry.appendChild(text);
+	      vidbar.appendChild(entry);
+	    }
+	    else {
+	      var str = JSON.stringify(response.result);
+	      localStorage.setItem('str', str);
+	      var array= JSON.parse(str);
+	      createList(array);
+	      }
+	    });        
+       
+        
         
         /* wikipedia here */
         
