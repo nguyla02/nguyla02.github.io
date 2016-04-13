@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<style type="text/css">
+		#title{
+		background-color:#9edfc0;
+		text-align: center;
+		margin: 0px;
+		padding:0px;
+		font-family: "Times New Roman", Times, serif;
+		
+		}
+        #bodyDOM{
+            height:680px;
+            margin: 0px;
+            padding: 0px;
+            background-color:#93aeb4;
+
+        }
+        #address{
+            width:190px;
+        }
+	   	    #map-canvas{
+            border: 5px solid black;
+    		height: 555px;
+    		/*height:250px;*/
+            width: 580px;
+            margin: 10px;
+            margin-top:45px;
+            margin-bottom:10px;
+            padding: 10px;
+            float:left;
+		}
+        #response{
+            border: 5px solid black;
+            height: 460px;
+
+            /*height:250px;*/
+            width: 525px;
+            margin-right: 20px;
+            margin-bottom:40px;
+            margin-left:25px;
+            padding: 5px;
+            float: right;
+            background-color: #9edfc0;
+            overflow: auto;
+            /*overflow-x:hidden;*/
+            position: absolute;
+            text-align: left;
+        }
+        #display{
+            border: 5px solid black;
+            height: 570px;
+            float:right;
+            width: 610px;
+            margin-top: 45px;
+            margin-right: 10px;
+            background-color:#b8546e;
+        }
+	  #panel2 {
+            position: absolute;
+            top: 70px;
+            /*left:30%;*/
+            margin-left:10.5%;
+            z-index: 5;
+            background-color: #b8546e;
+            padding: 5px;
+            border: 1px solid #999;
+            width:395px;
+      }
+     /* #panel1 {
+            position: absolute;
+            top: 5px;
+            /*left:30%;
+            margin-left:5px;
+            z-index: 5;
+            background-color: #000000;
+            padding: 5px;
+            border: 1px solid #999;
+            width:120px;
+      }*/
+      #videoNum{
+        width:110px;
+      }
+	</style>
+	<title>mapVideoSearch</title>
+        <!--ajax call-->
+        <script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+		</script>
+
+        <!--script for youtube call-->
+        <script type="text/javascript" src="https://apis.google.com/js/client.js" >
+        </script>
+       <!-- <script type="text/javascript" src="https://apis.google.com/js/client.js/guideCategories" >
+        </script>-->
+        <!--script for google map call-->
+        <script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2Xz7SFE49NjB3PTXjGUjTK8MqAFBwBI&libraries=places&sensor=false">
+		</script>
+       <!-- <script type="text/javascript" src="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo"></script>-->
+    </head>
+
+    
+    	<script type="text/javascript">
+        // Helper function to display JavaScript value on HTML page.
+        /*var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
+        var map;
+        var geocoder;
+function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
+
+            //var viderHttpRequestResponse=
+            //console.log(httpGet);
+            //console.log("hello");
+            //console.log(thumbnailsURL);
+            document.getElementById('address').innerHTML ="";
+          
+           // console.log("hello");
+           // console.log(stTitle);
+            //console.log(stVideoId);
+        //var responseString = JSON.stringify(stTitle, '', 2);
+        //console.log(stTitle.length);
+            for (var i=0; i<stTitle.length;i++){
+                
+                var time=dateTime[i];
+                var splitTime=time.split("T");
+                //console.log(splitTime)
+                document.getElementById('response').innerHTML += stTitle[i]+"\n"+"\n";
+                document.getElementById('response').innerHTML +="Uploaded At= "+splitTime+"\n"+"\n";
+                document.getElementById('response').innerHTML += '<img src =" '+thumbnailsURL[i]+' "/>'+"\n"+"\n";
+                
+                //document.getElementById('response').innerHTML += '<a href= "https://www.youtube.com/watch?v="+ stVideoId[i] target="_blank">Watch Now</a>'+"\n"+"\n";
+                var str = "Watch Now";
+                var result = str.link("https://www.youtube.com/watch?v=" + stVideoId[i]);
+                document.getElementById('response').innerHTML += result+"\n"+"\n"; 
+                
+                //document.getElementById('response').innerHTML += "https://www.youtube.com/watch?v=";
+                //document.getElementById('response').innerHTML += stVideoId[i]+"\n"+"\n";
+                document.getElementById("address").value="";
+                document.getElementById("videoNum").value="";
+        }
+        //document.getElementById('response').innerHTML += responseString;
+            //httpGet();
+         
+            //innerHTML+="placeholder=Enter city/state/country Name";
+        }
+        
+       /* function httpGet(theVideoUrl){
+            var xmlHttp = null;
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET",theVideoUrl,false);
+            xmlHttp.send(null);
+            //return xmlHttp.responseText;
+            console.log(xmlHttp.responseText);
+        }*/
+        // Called automatically when JavaScript client library is loaded.
+
+        function onClientLoad() {
+            //var addressq=address;
+            //console.log(addressq);
+            gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+        }
+
+        // Called automatically when YouTube API interface is loaded.
+        function onYouTubeApiLoad() {
+            
+            //console.log(addressq); prints correct
+
+             gapi.client.setApiKey('AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo');
+
+            //showResponse("Horray");
+            search();
+
+        }
+        function search() {
+            //console.log(addressq);
+            /*var vquery=addressq;
+            console.log(vquery);
+            var requestOptions = {
+                part:'snippet',
+                q:vquery
+
+            };*/
+           // console.log(requestOptions);prints good
+
+
+        // Use the JavaScript client library to create a search.list() API call.
+            var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";
+            
+            var qVar = document.getElementById("address").value;
+            //console.log(qVar); prints correct
+            var videoNum=document.getElementById("videoNum").value;
+            //console.log(videoNum);
+            var request = gapi.client.youtube.search.list({
+                type:'video',
+                maxResults:videoNum,
+                part:'snippet',
+                q:qVar,
+                
+
+            });
+
+        // Send the request to the API server,
+        // and invoke onSearchRepsonse() with the response.
+            request.execute(onSearchResponse);
+        }
+        // Called automatically with the response of the YouTube API request.
+        function onSearchResponse(response) {
+        //showResponse(response)
+        //console.log(response);
+        //var st="";
+        var stTitle=[];
+        var stVideoId=[];
+        var dateTime=[];
+        var thumbnails=[];
+        var thumbnailsURL=[];
+        for(var i in response.items){
+            var item=response.items[i];
+            //console.log("hello");
+            //console.log(item);
+            //console.log(item.snippet.title);
+            //console.log(item.id.videoId); 
+            //console.log(item.snippet.publishedAt)
+            thumbnails.push(item.snippet.thumbnails);
+
+            //st= item.snippet.title+" "+item.id.videoId;
+            stTitle.push(item.snippet.title);
+            stVideoId.push(item.id.videoId);
+            dateTime.push(item.snippet.publishedAt);
+            //console.log(stVideoId);
+              }
+            //console.log(stVideoId);
+            //console.log(dateTime);
+            //console.log(thumbnails);
+            for (var i=0; i<thumbnails.length;i++){
+                var photo=thumbnails[i]
+                //console.log(photo);
+                //console.log(photo.default.url)
+                thumbnailsURL.push(photo.default.url)
+            }
+            showResponse(stTitle, stVideoId,dateTime,thumbnailsURL);
+        }
+        function codeAddress() {
+            var address = document.getElementById('address').value;
+            //console.log(address); prints correct
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+                } else {
+                     alert('Geocode was not successful for the following reason: ' + status);
+                }
+
+            });
+           
+            onClientLoad();
+
+        }
+        function initialise(location){
+            
+            console.log(location);
+            //console.log("hello");
+            var currentLocation=new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+            geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                center:currentLocation,
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);    //map-canvas html div element, mapOtopions object that tells google how to display map
+                var marker= new google.maps.Marker({
+                    position: currentLocation,
+                    map:map //reference to variable map that contains google maps Map google.maps.Map
+
+                });
+                service = new google.maps.places.PlacesService(map);// for performSearch function
+                //google.maps.event.addListenerOnce(map,'bounds_changed',performSearch);// this ensures we wait until the map bounds are initialised before we perform the search
+                //$('#refresh').click(performSearch);// redo searchwhen ther refresh button is clicked
+                var circleOptions={
+                    strokeColor:"#0000FF",
+                    strokeOpacity:0.8,
+                    strokeWeight:1.5,
+                    fillColor: "#0000FF",
+                    map:map,
+                    center:currentLocation,
+                    radius:2000
+
+                };
+                var circle=new google.maps.Circle(circleOptions);
+        }
+
+        $(document).ready(function(){
+            navigator.geolocation.getCurrentPosition(initialise);
+           /*var theVideoUrl="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
+
+        });
+        </script>
+		<div id="title"> <h2> Welcome to Mapieo!</h2><div>
+        <body>
+        <div id="bodyDOM">
+    	<div id="map-canvas"></div>
+    	<!--<div id="panel1">
+        <input id="videoNum" type="textbox" placeholder="Enter # of Videos">
+    	</div>-->
+		<div id="panel2">
+        <input id="videoNum" type="textbox" placeholder="Enter # of Video">
+      	<input id="address" type="textbox" placeholder="Enter city/state/country Name">
+      	<input type="button" value="Enter" onclick="codeAddress()">
+        </div>
+        <div id="display">
+        <h3 style="color:black;float:center;display:inline-block;">Here are the videos with the place you entered</h3>
+        <pre id="response" ></pre>
+        </div>
+        </div>
+        
+    </body>
+</html
