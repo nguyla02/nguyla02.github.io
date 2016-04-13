@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<style type="text/css">
 		#title{
-		background-color:#9edfc0;
+		background-color:#95f1b2;
 		text-align: center;
 		margin: 0px;
 		padding:0px;
@@ -16,14 +16,14 @@
             height:680px;
             margin: 0px;
             padding: 0px;
-            background-color:#93aeb4;
+            background-color:#3a4548;
 
         }
         #address{
             width:190px;
         }
 	   	    #map-canvas{
-            border: 5px solid black;
+            border: 5px solid yellow;
     		height: 555px;
     		/*height:250px;*/
             width: 580px;
@@ -44,7 +44,7 @@
             margin-left:25px;
             padding: 5px;
             float: right;
-            background-color: #9edfc0;
+            background-color: #f9e41e;
             overflow: auto;
             /*overflow-x:hidden;*/
             position: absolute;
@@ -168,7 +168,7 @@ function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
             
             //console.log(addressq); prints correct
 
-             gapi.client.setApiKey('AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo');
+             gapi.client.setApiKey('AIzaSyCEX4fXO-85QBzlUQKwssfGBbqv8FnjSx0');
 
             //showResponse("Horray");
             search();
@@ -300,7 +300,7 @@ function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
 
         });
         </script>
-		<div id="title"> <h2> Welcome to Mapieo!</h2><div>
+		<div id="title"> <h2> MapTube Zone </h2><div>
         <body>
         <div id="bodyDOM">
     	<div id="map-canvas"></div>
@@ -313,7 +313,7 @@ function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
       	<input type="button" value="Enter" onclick="codeAddress()">
         </div>
         <div id="display">
-        <h3 style="color:black;float:center;display:inline-block;">Here are the videos with the place you entered</h3>
+        <h3 style="color:white;float:center;display:inline-block;">Videos You Want To See</h3>
         <pre id="response" ></pre>
         </div>
         </div>
