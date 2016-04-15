@@ -1,0 +1,145 @@
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<!--
+An element used to simplify youtube video search.
+
+Example:
+
+    <input value="{{searchQuery::input}}">
+
+    <button>Search</button>
+
+    <youtube-search query="{{searchQuery}}" google-api-key="YOUR_API_KEY" videos="{{videos}}">
+    </youtube-search>
+    
+    <template is="dom-repeat" items="{{videos}}">
+        <div># <span>{{index}}</span></div>
+        <div>videoId: <span>{{item.id}}</span></div>
+        <div>videoTitle: <span>{{item.snippet.localized.title}}</span></div>
+        <div>videoDescription: <span>{{item.snippet.localized.description}}</span></div>
+        <div>videoDuration: <span>{{duration(item.contentDetails.duration)}}</span></div>
+        <div>videoNumberOfViews: <span>{{item.statistics.viewCount}}</span></div>
+        </br>
+    </template>
+    
+    <script>
+      document.querySelector('button').addEventListener('click', function() {
+        document.querySelector('youtube-search').search();
+      });
+      var template = document.querySelector('#t');
+      template.duration = function(duration) {
+        return moment.duration(duration).format()
+      };
+    </script>
+
+@demo
+-->
+<dom-module id="youtube-search">
+  <template>
+    <iron-ajax id="search" url="https://www.googleapis.com/youtube/v3/search" handle-as="json" on-response="_handleSearchResponse" verbose>
+    </iron-ajax>
+    <iron-ajax id="videos" url="https://www.googleapis.com/youtube/v3/videos" handle-as="json" on-response="_handleVideosResponse" verbose>
+    </iron-ajax>
+  </template>
+  
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'youtube-search',
+
+    properties: {
+
+      /**
+       * Your google client api key.
+       *
+       */
+      googleApiKey: {
+        type: String,
+
+      },
+      
+      /**
+       * The video search keyword
+       *
+       */
+      query: {
+          type: String,
+          value: "",
+      },
+      
+      /**
+       * The results from the search
+       *
+       */
+      videos: {
+        type: Array,
+        notify: true,
+        readOnly: true,
+      }
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+      // `ready` is called after all elements have been configured, but
+      // propagates bottom-up. This element's children are ready, but parents
+      // are not.
+      //
+      // This is the point where you should make modifications to the DOM (when
+      // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+      // `attached` fires once the element and its parents have been inserted
+      // into a document.
+      //
+      // This is a good place to perform any work related to your element's
+      // visual state or active behavior (measuring sizes, beginning animations,
+      // loading resources, etc).
+    },
+
+    detached: function() {
+      // The analog to `attached`, `detached` fires when the element has been
+      // removed from a document.
+      //
+      // Use this to clean up anything you did in `attached`.
+    },
+
+    // Element Behavior
+
+    /**
+     * Launch the search.
+     *
+     */
+    search: function() {
+      if(this.query != "") {
+        this.$$('#search').params = {"part":"id", "q":this.query, "key":this.googleApiKey, "maxResults":50, "type":"video"};
+        this.$$('#search').generateRequest();
+      }
+    },
+    getVideos: function(videoIds) {
+      commaSeparatedIds = videoIds.join(',')
+      this.$$('#videos').params = {"part":"snippet,contentDetails,statistics", "key":this.googleApiKey, "id":commaSeparatedIds};
+      this.$$('#videos').generateRequest();
+    },
+    
+    _handleSearchResponse: function(e) {
+      this.getVideos(e.detail.response.items.map(function(element){
+        return element.id.videoId
+      }));
+    },
+    
+    _handleVideosResponse: function(e) {
+      console.log(e.detail.response.items)
+      this._setVideos(e.detail.response.items);
+    },
+
+  });
+
+</script>
