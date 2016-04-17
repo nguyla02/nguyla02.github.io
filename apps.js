@@ -91,7 +91,7 @@ searchResults[i] +
 }
 });
 };
-$('#search-button').on('click', function () {
+$('#address').on('click', function () {
 var inputText = $.trim($('#query').val());
 startSearch(inputText);
 });
