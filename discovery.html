@@ -74,24 +74,10 @@
             z-index: 5;
             background-color: #fdb301;
             padding: 5px;
-            border: 1px solid #999;
+            border: 10 px solid black;
             width:395px;
       }
-     /* #panel1 {
-            position: absolute;
-            top: 5px;
-            /*left:30%;
-            margin-left:5px;
-            z-index: 5;
-            background-color: #000000;
-            padding: 5px;
-            border: 1px solid #999;
-            width:120px;
-      }*/
-      
-      /*#videoNum{
-        width:110px;
-      }*/
+
 	</style>
 	<title> Discovery </title>
         <!--ajax call-->
@@ -164,15 +150,7 @@
             //innerHTML+="placeholder=Enter city/state/country Name";
         }
         
-       /* function httpGet(theVideoUrl){
-            var xmlHttp = null;
-            xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET",theVideoUrl,false);
-            xmlHttp.send(null);
-            //return xmlHttp.responseText;
-            console.log(xmlHttp.responseText);
-        }*/
-        // Called automatically when JavaScript client library is loaded.
+
 
         function onClientLoad() {
             //var addressq=address;
@@ -346,16 +324,10 @@
         <body>
         <div id="bodyDOM">
     	<div id="map-canvas"></div>
-    	<!--<div id="panel1">
-        <input id="videoNum" type="textbox" placeholder="Enter # of Videos">
-    	</div>-->
-    	<!--<input id="artist" type="textbox" placeholder="Enter city/state/country Name">
-        <input type="button" value="Enter" onclick="codeAddress()">
-        </div> -->
         <div id='content' class="container font-light">
       <br>
        <div id='seed' class='centered'>
-        span> Enter country name :
+        Search the place you want to DISCOVER:
              <input title="Artist" type="text"  size=34 id="artist" name="artist" value=''/>
         </span>
         <button value="search" id="search-button" onclick="codeAddress()" name="search"> search </button> 
