@@ -91,8 +91,8 @@ searchResults[i] +
 }
 });
 };
-$('#address').on('click', function () {
-var inputText = $.trim($('#query').val());
+$('#search-button').on('click', function () {
+var inputText = $.trim($('#artist').val());
 startSearch(inputText);
 });
 $(document).on('click', '.snippet-item', function (event) {
