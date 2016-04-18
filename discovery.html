@@ -23,21 +23,22 @@
         }
         
        #artist{
-            width:190px;
+            width:300px;
         }
         
         
-	   	    #map-canvas{
-            border: 5px solid black;
-    		height: 555px;
-    		/*height:250px;*/
-            width: 580px;
-            margin: 10px;
-            margin-top:45px;
-            margin-bottom:10px;
-            padding: 10px;
-            float:left;
-		}
+	#map-canvas{
+        border: 5px solid black;
+    	height: 555px;
+    	width: 580px;
+        margin: 10px;
+        margin-top:45px;
+        margin-bottom:10px;
+        padding: 10px;
+        float:left;
+	}
+	
+	
         #response{
             border: 10px solid black;
             height: 460px;
@@ -64,8 +65,40 @@
             width: 610px;
             margin-top: 45px;
             margin-right: 10px;
-            background-color:#fdb301;
+            background-color:#4b6fb1;
         }
+        
+        
+        #response2{
+            border: 10px solid black;
+            height: 460px;
+
+            /*height:250px;*/
+            width: 525px;
+            margin-right: 20px;
+            margin-bottom:40px;
+            margin-left:25px;
+            padding: 5px;
+            float: right;
+            background-color: white;
+            overflow: auto;
+            /*overflow-x:hidden;*/
+            position: absolute;
+            text-align: left;
+        }
+        
+        
+        #display2{
+            border: 10px solid black;
+            height: 570px;
+            float:right;
+            width: 610px;
+            margin-top: 45px;
+            margin-right: 10px;
+            background-color:#4b6fb1;
+        }
+        
+        
 	  #panel2 {
             position: absolute;
             top: 70px;
@@ -328,14 +361,13 @@
       <br>
        <div id='seed' class='centered'>
         Search the place you want to DISCOVER:
-             <input title="Artist" type="text"  size=34 id="artist" name="artist" value=''/>
+             <input title="Artist" type="text"  size=50 id="artist" name="artist" value=''/>
         </span>
         <button value="search" id="search-button" onclick="codeAddress()" name="search"> search </button> 
       </div>
       </div>
-        <!--<input id="query" id="address" value='' type="text"/> 
-        <button id="search-button"  onclick = "codeAddress();"> Search </button>
-        </div> -->
+
+
         <div id="display">
         <h3 style="color:white;float:center;display:inline-block;">Videos You Want To See</h3>
         <pre id="response" ></pre>
