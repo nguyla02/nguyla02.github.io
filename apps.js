@@ -1,21 +1,7 @@
 $(document).ready(function () {
-function showResult(contentHtml) {
+function document.getElementById('response2').showResult(contentHtml) {
   
-            document.getElementById('artist').innerHTML ="";
-          
-            for (var i=0; i<stTitle.length;i++){
-                
-                var time=dateTime[i];
-                var splitTime=time.split("T");
-                //console.log(splitTime)
-                document.getElementById('response2').innerHTML += stTitle[i]+"\n"+"\n";
-                document.getElementById('response2').innerHTML +="Uploaded At= "+splitTime+"\n"+"\n";
-                document.getElementById('response2').innerHTML += '<img src =" '+thumbnailsURL[i]+' "/>'+"\n"+"\n";
-                
-                //document.getElementById('response').innerHTML += '<a href= "https://www.youtube.com/watch?v="+ stVideoId[i] target="_blank">Watch Now</a>'+"\n"+"\n";
-                var str = "Watch Now";
-                var result = str.link('https://en.wikipedia.org/w/api.php?format=json&action=parse&redirects&prop=text&mobileformat=html&page=' + inputText + '&section=0');
-                document.getElementById('response').innerHTML += result+"\n"+"\n"; 
+
 
 $('#content').html(contentHtml);
 }
