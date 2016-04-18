@@ -1,105 +1,367 @@
-$(document).ready(function () {
-function showResult(contentHtml) {
-$('#content').html(contentHtml);
-}
-function startSearch(inputText) {
-$.ajax({
-//url: 'https://ru.wikipedia.org/w/api.php?format=json&action=mobileview&redirects&prop=sections|normalizedtitle&sectionprop=toclevel|line|index&page=%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%20(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)',
-url: 'https://en.wikipedia.org/w/api.php?format=json&action=parse&redirects&prop=text&mobileformat=html&page=' + inputText + '&section=0',
-//url: 'http://en.wikipedia.org/w/api.php?format=json&action=query&titles=Main%20Page&prop=revisions&rvprop=content&callback=?',
-dataType: 'jsonp'
-}).done(function (data) {
-console.log(data);
-if (data.error) {
-switch (data.error.code) {
-case 'missingtitle':
-$.ajax({
-url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srnamespace=0&srlimit=10&srsearch=' + inputText,
-dataType: 'jsonp'
-}).done(function (data) {
-console.log(data);
-if (data.error) {
-}
-else {
-var $ul = $('<ol></ol>');
-for (var i = 0; i < data.query.search.length; i++) {
-var item = data.query.search[i];
-var $li = $('<li></li>');
-$li.append('<h3><a href="#" class="snippet-item">' + item.title +  '</a></h3>');
-$li.append(item.snippet);
-$ul.append($li);
-}
-showResult($ul);
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<style type="text/css">
+		#title{
+		background-color: gray;
+		text-align: center;
+		margin: 0px;
+		padding:0px;
+		font-family: "Times New Roman", Times, serif;
+		
+		}
+        #bodyDOM{
+            height:380px;
+            margin: 0px;
+            padding: 0px;
+            background-color: white;
+
+        }
+       #artist{
+            width:190px;
+        }
+	   	    #map-canvas{
+            border: 5px solid black;
+    		height: 555px;
+    		/*height:250px;*/
+            width: 580px;
+            margin: 10px;
+            margin-top:45px;
+            margin-bottom:10px;
+            padding: 10px;
+            float:left;
+		}
+        #response{
+            border: 5px solid black;
+            height: 460px;
+
+            /*height:250px;*/
+            width: 525px;
+            margin-right: 20px;
+            margin-bottom:40px;
+            margin-left:25px;
+            padding: 5px;
+            float: right;
+            background-color: white;
+            overflow: auto;
+            /*overflow-x:hidden;*/
+            position: absolute;
+            text-align: left;
+        }
+        #display{
+            border: 5px gray;
+            height: 570px;
+            float:right;
+            width: 610px;
+            margin-top: 45px;
+            margin-right: 10px;
+            background-color:#fdb301;
+        }
+	  #panel2 {
+            position: absolute;
+            top: 70px;
+            /*left:30%;*/
+            margin-left:10.5%;
+            z-index: 5;
+            background-color: #fdb301;
+            padding: 5px;
+            border: 1px solid #999;
+            width:395px;
+      }
+     /* #panel1 {
+            position: absolute;
+            top: 5px;
+            /*left:30%;
+            margin-left:5px;
+            z-index: 5;
+            background-color: #000000;
+            padding: 5px;
+            border: 1px solid #999;
+            width:120px;
+      }*/
+      
+      /*#videoNum{
+        width:110px;
+      }*/
+	</style>
+	<title> Discovery </title>
+        <!--ajax call-->
+        <script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+		</script>
+
+        <!--script for youtube call-->
+        <script type="text/javascript" src="https://apis.google.com/js/client.js" >
+        </script>
+       <!-- <script type="text/javascript" src="https://apis.google.com/js/client.js/guideCategories" >
+        </script>-->
+        <!--script for google map call-->
+        <script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2Xz7SFE49NjB3PTXjGUjTK8MqAFBwBI&libraries=places&sensor=false">
+		</script>
+       <!-- <script type="text/javascript" src="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo"></script>-->
+    
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="apps.js"></script>
+    
+    
+    </head>
+
+    
+    	<script type="text/javascript">
+        // Helper function to display JavaScript value on HTML page.
+        /*var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
+        var map;
+        var geocoder;
+        
+        
+	function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
+
+            //var viderHttpRequestResponse=
+            //console.log(httpGet);
+            //console.log("hello");
+            //console.log(thumbnailsURL);
+            document.getElementById('artist').innerHTML ="";
+          
+           // console.log("hello");
+           // console.log(stTitle);
+            //console.log(stVideoId);
+        //var responseString = JSON.stringify(stTitle, '', 2);
+        //console.log(stTitle.length);
+            for (var i=0; i<stTitle.length;i++){
+                
+                var time=dateTime[i];
+                var splitTime=time.split("T");
+                //console.log(splitTime)
+                document.getElementById('response').innerHTML += stTitle[i]+"\n"+"\n";
+                document.getElementById('response').innerHTML +="Uploaded At= "+splitTime+"\n"+"\n";
+                document.getElementById('response').innerHTML += '<img src =" '+thumbnailsURL[i]+' "/>'+"\n"+"\n";
+                
+                //document.getElementById('response').innerHTML += '<a href= "https://www.youtube.com/watch?v="+ stVideoId[i] target="_blank">Watch Now</a>'+"\n"+"\n";
+                var str = "Watch Now";
+                var result = str.link("https://www.youtube.com/watch?v=" + stVideoId[i]);
+                document.getElementById('response').innerHTML += result+"\n"+"\n"; 
+                
+                //document.getElementById('response').innerHTML += "https://www.youtube.com/watch?v=";
+                //document.getElementById('response').innerHTML += stVideoId[i]+"\n"+"\n";
+                document.getElementById("artist").value="";
+                //document.getElementById("8").value="";
+        }
+        //document.getElementById('response').innerHTML += responseString;
+            //httpGet();
+         
+            //innerHTML+="placeholder=Enter city/state/country Name";
+        }
+        
+       /* function httpGet(theVideoUrl){
+            var xmlHttp = null;
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET",theVideoUrl,false);
+            xmlHttp.send(null);
+            //return xmlHttp.responseText;
+            console.log(xmlHttp.responseText);
+        }*/
+        // Called automatically when JavaScript client library is loaded.
+
+        function onClientLoad() {
+            //var addressq=address;
+            //console.log(addressq);
+            gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+        }
+
+        // Called automatically when YouTube API interface is loaded.
+        function onYouTubeApiLoad() {
+            
+            //console.log(addressq); prints correct
+
+             gapi.client.setApiKey('AIzaSyCEX4fXO-85QBzlUQKwssfGBbqv8FnjSx0');
+
+            //showResponse("Horray");
+            search();
+
+        }
+        function search() {
+            //console.log(addressq);
+            /*var vquery=addressq;
+            console.log(vquery);
+            var requestOptions = {
+                part:'snippet',
+                q:vquery
+
+            };*/
+           // console.log(requestOptions);prints good
 
 
-}
+        // Use the JavaScript client library to create a search.list() API call.
+            var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";
+            
+            var qVar = document.getElementById("artist").value;
+            //console.log(qVar); prints correct
+          //var videoNum=document.getElementById("videoNum").value;
+            //console.log(videoNum);
+            var request = gapi.client.youtube.search.list({
+                type:'video',
+                maxResults:20, 
+                //maxResults:videoNum,
+                part:'snippet',
+                q:qVar,
+                
 
-});
-break;
-}
-}
-else {
-showResult(data.parse.text['*']);
-}
-});
-}
+            });
 
-var searchWikipedia = function(currentTerm){
-var url = "http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=";
-$.ajax({
-url: url + currentTerm,
-type: 'GET',
-dataType: 'jsonp',
-error: function(data){
-console.log("We got problems");
-console.log(data.status);
-},
-success: function(data){
-console.log("WooHoo!");
-//Check the browser console to see the returned data
-console.log(data);
-//Use jQuery to insert the search term into the appropriate DOM element
-//The data we want is the first item in the returned JSON, hence value "0"
-$("#searchTerm").html(data[0]);
-//The data we want is the second item in the returned JSON, hence value "1"
-//Create a var to save the array of search results
-var searchResults = data[1];
+        // Send the request to the API server,
+        // and invoke onSearchRepsonse() with the response.
+            request.execute(onSearchResponse);
+        }
+        // Called automatically with the response of the YouTube API request.
+        function onSearchResponse(response) {
+        //showResponse(response)
+        //console.log(response);
+        //var st="";
+        var stTitle=[];
+        var stVideoId=[];
+        var dateTime=[];
+        var thumbnails=[];
+        var thumbnailsURL=[];
+        for(var i in response.items){
+            var item=response.items[i];
+            //console.log("hello");
+            //console.log(item);
+            //console.log(item.snippet.title);
+            //console.log(item.id.videoId); 
+            //console.log(item.snippet.publishedAt)
+            thumbnails.push(item.snippet.thumbnails);
 
-/*var $ul = $('<ol></ol>');
-for (var i = 0; i < data.query.search.length; i++) {
-var item = data.query.search[i];
-var $li = $('<li></li>');
+            //st= item.snippet.title+" "+item.id.videoId;
+            stTitle.push(item.snippet.title);
+            stVideoId.push(item.id.videoId);
+            dateTime.push(item.snippet.publishedAt);
+            //console.log(stVideoId);
+              }
+            //console.log(stVideoId);
+            //console.log(dateTime);
+            //console.log(thumbnails);
+            for (var i=0; i<thumbnails.length;i++){
+                var photo=thumbnails[i]
+                //console.log(photo);
+                //console.log(photo.default.url)
+                thumbnailsURL.push(photo.default.url)
+            }
+            showResponse(stTitle, stVideoId,dateTime,thumbnailsURL);
+        }
+        function codeAddress() {
+            var address = document.getElementById('artist').value;
+            //console.log(address); prints correct
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+                } else {
+                     alert('Geocode was not successful for the following reason: ' + status);
+                }
 
-$li.append('<h3><a href="#" class="snippet-item">' + item.title +  '</a></h3>');
-$li.append(item.snippet);
-$ul.append($li);*/
-//Loop through the array of results
-for (var i = 0; i < searchResults.length; i++){
-//Use 'replace' and a regular expression to substitue white space with '_' character
-var resultTerms = searchResults[i].replace(/\s/g, '_');
-var curURL = 'http://en.wikipedia.org/wiki/' + item;
-//Use jQuery's append() function to add the searchResults to the DOM
-//The argument for the append function will be a string of HTML
-$("#resultsTarget").append(
-"<p class='wikiResults'>" +
-"<a href=" + curURL + ">" +
-searchResults[i] +
-"</a>" +
-"</p>"
-);
-}
-}
-});
-};
-$('#search-button').on('click', function () {
-var inputText = $.trim($('#artist').val());
-startSearch(inputText);
-});
-$(document).on('click', '.snippet-item', function (event) {
-//event.preventDefault();
-//var newSearchTerm = $("#query").val();
-//searchWikipedia(newSearchTerm);
-var text = $(this).text();
-startSearch(text);
-});
-});
+            });
+           
+            onClientLoad();
+
+        }
+        function initialise(location){
+            
+            console.log(location);
+            //console.log("hello");
+            var currentLocation=new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+            geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                center:currentLocation,
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);    //map-canvas html div element, mapOtopions object that tells google how to display map
+                var marker= new google.maps.Marker({
+                    position: currentLocation,
+                    map:map //reference to variable map that contains google maps Map google.maps.Map
+
+                });
+                service = new google.maps.places.PlacesService(map);// for performSearch function
+                //google.maps.event.addListenerOnce(map,'bounds_changed',performSearch);// this ensures we wait until the map bounds are initialised before we perform the search
+                //$('#refresh').click(performSearch);// redo searchwhen ther refresh button is clicked
+                var circleOptions={
+                    strokeColor:"#0000FF",
+                    strokeOpacity:0.8,
+                    strokeWeight:1.5,
+                    fillColor: "#0000FF",
+                    map:map,
+                    center:currentLocation,
+                    radius:2000
+
+                };
+                var circle=new google.maps.Circle(circleOptions);
+        }
+
+        $(document).ready(function(){
+            navigator.geolocation.getCurrentPosition(initialise);
+           /*var theVideoUrl="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
+
+        });
+	  var q = $('#query').val();
+	  var request = gapi.client.youtube.search.list({
+	    type: 'video',
+	    q: q,
+	    part: 'snippet' 
+	  });
+	
+	  request.execute(function(response) {
+	    if ('error' in response) {
+	      var vidbar = document.getElementById("vidbar");
+	      var entry = document.createElement("div");
+	      var text = document.createTextNode("Error: invalid search. Please search another topic.");
+	      entry.className = "error";
+	      entry.appendChild(text);
+	      vidbar.appendChild(entry);
+	    }
+	    else {
+	      var str = JSON.stringify(response.result);
+	      localStorage.setItem('str', str);
+	      var array= JSON.parse(str);
+	      createList(array);
+	      }
+	    });        
+	        
+        </script>
+		<div id="title"> <h1> Discovery </h1><div>
+        <body>
+        <div id="bodyDOM">
+    	<div id="map-canvas"></div>
+    	<!--<div id="panel1">
+        <input id="videoNum" type="textbox" placeholder="Enter # of Videos">
+    	</div>-->
+    	<!--<input id="artist" type="textbox" placeholder="Enter city/state/country Name">
+        <input type="button" value="Enter" onclick="codeAddress()">
+        </div> -->
+        <div id='content' class="container font-light">
+      <br>
+       <div id='seed' class='centered'>
+        span> Enter country name :
+             <input title="Artist" type="text"  size=34 id="artist" name="artist" value=''/>
+        </span>
+        <button value="search" id="search-button" onclick="codeAddress()" name="search"> search </button> 
+      </div>
+      </div>
+        <!--<input id="query" id="address" value='' type="text"/> 
+        <button id="search-button"  onclick = "codeAddress();"> Search </button>
+        </div> -->
+        <div id="display">
+        <h3 style="color:white;float:center;display:inline-block;">Videos You Want To See</h3>
+        <pre id="response" ></pre>
+        </div>
+        </div>
+        
+    </body>
+</html
