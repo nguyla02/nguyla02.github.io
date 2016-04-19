@@ -13,26 +13,25 @@
 		
 		}
         #bodyDOM{
-            height:600px;
+            height:380px;
             margin: 0px;
             padding: 0px;
             background-color: white;
 
         }
-       #artist{
+       #address{
             width:190px;
         }
-        
-        
-	#map-canvas{
-        border: 5px solid black;
-    	height: 555px;
-    	width: 580px;
-        margin: 10px;
-        margin-top:10%;
-        margin-bottom:10px;
-        padding: 10px;
-        float:left;
+	   	    #map-canvas{
+            border: 5px solid black;
+    		height: 555px;
+    		/*height:250px;*/
+            width: 580px;
+            margin: 10px;
+            margin-top:45px;
+            margin-bottom:10px;
+            padding: 10px;
+            float:left;
 		}
         #response{
             border: 5px solid black;
@@ -40,15 +39,15 @@
 
             /*height:250px;*/
             width: 525px;
-            margin-right: 15%;
-            /*margin-bottom:40px;*/
+            margin-right: 20px;
+            margin-bottom:40px;
             margin-left:25px;
             padding: 5px;
             float: right;
             background-color: white;
             overflow: auto;
             /*overflow-x:hidden;*/
-            position: relative;
+            position: absolute;
             text-align: left;
         }
         #display{
@@ -56,9 +55,9 @@
             height: 570px;
             float:right;
             width: 610px;
-            margin-top: 10%;
-            margin-right: 10%;
-            background-color:black;
+            margin-top: 45px;
+            margin-right: 10px;
+            background-color:#fdb301;
         }
 	  #panel2 {
             position: absolute;
@@ -71,7 +70,27 @@
             border: 1px solid #999;
             width:395px;
       }
-
+	  #container #wiki {
+	     width: 100%;
+	     background: clear;
+	     height: 200;
+	     overflow: scroll;
+	}
+     /* #panel1 {
+            position: absolute;
+            top: 5px;
+            /*left:30%;
+            margin-left:5px;
+            z-index: 5;
+            background-color: #000000;
+            padding: 5px;
+            border: 1px solid #999;
+            width:120px;
+      }*/
+      
+      /*#videoNum{
+        width:110px;
+      }*/
 	</style>
 	<title> Discovery </title>
         <!--ajax call-->
@@ -112,7 +131,7 @@
             //console.log(httpGet);
             //console.log("hello");
             //console.log(thumbnailsURL);
-            document.getElementById('artist').innerHTML ="";
+            document.getElementById('address').innerHTML ="";
           
            // console.log("hello");
            // console.log(stTitle);
@@ -135,7 +154,7 @@
                 
                 //document.getElementById('response').innerHTML += "https://www.youtube.com/watch?v=";
                 //document.getElementById('response').innerHTML += stVideoId[i]+"\n"+"\n";
-                document.getElementById("artist").value="";
+                document.getElementById("address").value="";
                 //document.getElementById("8").value="";
         }
         //document.getElementById('response').innerHTML += responseString;
@@ -186,7 +205,7 @@
         // Use the JavaScript client library to create a search.list() API call.
             var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";
             
-            var qVar = document.getElementById("artist").value;
+            var qVar = document.getElementById("address").value;
             //console.log(qVar); prints correct
           //var videoNum=document.getElementById("videoNum").value;
             //console.log(videoNum);
@@ -240,8 +259,8 @@
             }
             showResponse(stTitle, stVideoId,dateTime,thumbnailsURL);
         }
-        function codeAddress() {
-            var address = document.getElementById('artist').value;
+        function search1() {
+            var address = document.getElementById('address').value;
             //console.log(address); prints correct
             geocoder.geocode( { 'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -322,35 +341,41 @@
 	    });        
 	        
         </script>
+	 </script>
 		<div id="title"> <h1 style="color:white;float:center;display:inline-block;"> Discovery </h1><div>
         <body>
         <div id="bodyDOM">
-
     	<div id="map-canvas"></div>
     	<!--<div id="panel1">
         <input id="videoNum" type="textbox" placeholder="Enter # of Videos">
     	</div>-->
     	<!--<input id="artist" type="textbox" placeholder="Enter city/state/country Name">
-        <input type="button" value="Enter" onclick="codeAddress()">
+        <input type="button" value="Enter" onclick="search()">
         </div> -->
-        <div id='content' class="container font-light">
-      <br>
-       <div id='seed' class='centered'>
-        <h3> Discover: </h3>
-             <input title="Artist" type="text"  size=34 id="artist" name="artist" value=''/>
-        </span>
-        <div id="display">
-        <h2 style="color:white;float:center;display:inline-block;">VIDEOS</h2>
-        <pre id="response" ></pre>
+        <div id='header'> 
+	</div>
+         <div id='searchbar'> 
+	<div id="buttons">
+      	<label> <input id="address" value='' type="text"/><button id="search-button" onclick="search1();">search</button></label>
         </div>
-        <button value="search" id="search-button" onclick="codeAddress()" name="search"> search </button> 
-      </div>
-	
-      </div>
+        </div>
+        <div id="container">
+        <div id= 'wiki' height='200'> 
+	<!--<form id="s-form">
+	<input type="text" style="width: 300px" />
+	<button type="button">Искать</button>
+	</form>-->
+	<div style="font-size: 12px; font-family: 'Arial'; width: 100%; border: 1px solid black; padding: 20px; overflow: scroll;" id="content"></div>
+	</div>
+	</div>
+       
         <!--<input id="query" id="address" value='' type="text"/> 
         <button id="search-button"  onclick = "codeAddress();"> Search </button>
         </div> -->
-
+        <div id="display">
+        <h2 style="color:white;float:center;display:inline-block;">VIDEOS</h3>
+        <pre id="response" ></pre>
+        </div>
         </div>
         
     </body>
