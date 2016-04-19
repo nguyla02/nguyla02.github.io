@@ -36,12 +36,10 @@
         #response{
             border: 5px solid black;
             height: 475px;
-
-            /*height:250px;*/
-            width: 525px;
-            margin-right: 18px;
-            margin-bottom:40px;
-            margin-left:25px;
+            width: 550px;
+            margin-right: 5px;
+            margin-bottom:20px;
+            margin-left:5px;
             padding: 5px;
             float: right;
             background-color: white;
@@ -76,39 +74,21 @@
 	     height: 200;
 	     overflow: scroll;
 	}
-     /* #panel1 {
-            position: absolute;
-            top: 5px;
-            /*left:30%;
-            margin-left:5px;
-            z-index: 5;
-            background-color: #000000;
-            padding: 5px;
-            border: 1px solid #999;
-            width:120px;
-      }*/
-      
-      /*#videoNum{
-        width:110px;
-      }*/
+
 	</style>
 	<title> Discovery </title>
-        <!--ajax call-->
+
         <script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/123FB5C8-00A9-1E47-B5E8-1C61647EC9EC/main.js" charset="UTF-8"></script><script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
 		</script>
 
-        <!--script for youtube call-->
         <script type="text/javascript" src="https://apis.google.com/js/client.js" >
         </script>
-       <!-- <script type="text/javascript" src="https://apis.google.com/js/client.js/guideCategories" >
-        </script>-->
-        <!--script for google map call-->
+     
         <script type="text/javascript"
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2Xz7SFE49NjB3PTXjGUjTK8MqAFBwBI&libraries=places&sensor=false">
 		</script>
-       <!-- <script type="text/javascript" src="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo"></script>-->
-    
+   
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -119,25 +99,12 @@
 
     
     	<script type="text/javascript">
-        // Helper function to display JavaScript value on HTML page.
-        /*var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
         var map;
         var geocoder;
         
         
 	function showResponse(stTitle, stVideoId,dateTime, thumbnailsURL) {
-
-            //var viderHttpRequestResponse=
-            //console.log(httpGet);
-            //console.log("hello");
-            //console.log(thumbnailsURL);
             document.getElementById('address').innerHTML ="";
-          
-           // console.log("hello");
-           // console.log(stTitle);
-            //console.log(stVideoId);
-        //var responseString = JSON.stringify(stTitle, '', 2);
-        //console.log(stTitle.length);
             for (var i=0; i<stTitle.length;i++){
                 
                 var time=dateTime[i];
@@ -152,64 +119,27 @@
                 var result = str.link("https://www.youtube.com/watch?v=" + stVideoId[i]);
                 document.getElementById('response').innerHTML += result+"\n"+"\n"; 
                 
-                //document.getElementById('response').innerHTML += "https://www.youtube.com/watch?v=";
-                //document.getElementById('response').innerHTML += stVideoId[i]+"\n"+"\n";
                 document.getElementById("address").value="";
-                //document.getElementById("8").value="";
         }
         document.getElementById('address').innerHTML ="";
-        //document.getElementById('response').innerHTML += responseString;
-            //httpGet();
-         
-            //innerHTML+="placeholder=Enter city/state/country Name";
+
         }
         
-       /* function httpGet(theVideoUrl){
-            var xmlHttp = null;
-            xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET",theVideoUrl,false);
-            xmlHttp.send(null);
-            //return xmlHttp.responseText;
-            console.log(xmlHttp.responseText);
-        }*/
-        // Called automatically when JavaScript client library is loaded.
-
         function onClientLoad() {
-            //var addressq=address;
-            //console.log(addressq);
+  
             gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
         }
-
-        // Called automatically when YouTube API interface is loaded.
         function onYouTubeApiLoad() {
-            
-            //console.log(addressq); prints correct
-
              gapi.client.setApiKey('AIzaSyCEX4fXO-85QBzlUQKwssfGBbqv8FnjSx0');
 
-            //showResponse("Horray");
             search();
 
         }
         function search() {
-            //console.log(addressq);
-            /*var vquery=addressq;
-            console.log(vquery);
-            var requestOptions = {
-                part:'snippet',
-                q:vquery
 
-            };*/
-           // console.log(requestOptions);prints good
-
-
-        // Use the JavaScript client library to create a search.list() API call.
             var videoURL ="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";
             
             var qVar = document.getElementById("address").value;
-            //console.log(qVar); prints correct
-          //var videoNum=document.getElementById("videoNum").value;
-            //console.log(videoNum);
             var request = gapi.client.youtube.search.list({
                 type:'video',
                 maxResults:20, 
@@ -220,15 +150,9 @@
 
             });
 
-        // Send the request to the API server,
-        // and invoke onSearchRepsonse() with the response.
             request.execute(onSearchResponse);
         }
-        // Called automatically with the response of the YouTube API request.
         function onSearchResponse(response) {
-        //showResponse(response)
-        //console.log(response);
-        //var st="";
         var stTitle=[];
         var stVideoId=[];
         var dateTime=[];
@@ -236,33 +160,19 @@
         var thumbnailsURL=[];
         for(var i in response.items){
             var item=response.items[i];
-            //console.log("hello");
-            //console.log(item);
-            //console.log(item.snippet.title);
-            //console.log(item.id.videoId); 
-            //console.log(item.snippet.publishedAt)
             thumbnails.push(item.snippet.thumbnails);
-
-            //st= item.snippet.title+" "+item.id.videoId;
             stTitle.push(item.snippet.title);
             stVideoId.push(item.id.videoId);
             dateTime.push(item.snippet.publishedAt);
-            //console.log(stVideoId);
               }
-            //console.log(stVideoId);
-            //console.log(dateTime);
-            //console.log(thumbnails);
             for (var i=0; i<thumbnails.length;i++){
                 var photo=thumbnails[i]
-                //console.log(photo);
-                //console.log(photo.default.url)
                 thumbnailsURL.push(photo.default.url)
             }
             showResponse(stTitle, stVideoId,dateTime,thumbnailsURL);
         }
         function search1() {
             var address = document.getElementById('address').value;
-            //console.log(address); prints correct
             geocoder.geocode( { 'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
@@ -293,12 +203,11 @@
                 map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);    //map-canvas html div element, mapOtopions object that tells google how to display map
                 var marker= new google.maps.Marker({
                     position: currentLocation,
-                    map:map //reference to variable map that contains google maps Map google.maps.Map
+                    map:map
 
                 });
-                service = new google.maps.places.PlacesService(map);// for performSearch function
-                //google.maps.event.addListenerOnce(map,'bounds_changed',performSearch);// this ensures we wait until the map bounds are initialised before we perform the search
-                //$('#refresh').click(performSearch);// redo searchwhen ther refresh button is clicked
+                service = new google.maps.places.PlacesService(map);
+
                 var circleOptions={
                     strokeColor:"#0000FF",
                     strokeOpacity:0.8,
@@ -314,8 +223,7 @@
 
         $(document).ready(function(){
             navigator.geolocation.getCurrentPosition(initialise);
-           /*var theVideoUrl="https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=NP&key=AIzaSyAiy1Op3hMxBzP_GJARcMqgf-Fv3oIg1mo";*/
-
+          
         });
 	  var q = $('#query').val();
 	  var request = gapi.client.youtube.search.list({
@@ -351,33 +259,18 @@
         <h3 style="color:white;float:center;display:inline-block;">VIDEOS</h3>
         <pre id="response" ></pre>
         </div>
-    	<!--<div id="panel1">
-        <input id="videoNum" type="textbox" placeholder="Enter # of Videos">
-    	</div>-->
-    	<!--<input id="artist" type="textbox" placeholder="Enter city/state/country Name">
-        <input type="button" value="Enter" onclick="search()">
-        </div> -->
         <div id='header'> 
 	</div>
          <div id='searchbar'> 
 	<div id="buttons">
-      	<label> <input id="address" value='' type="text"/><button id="search-button" onclick="search1();">search your place</button></label>
+      	<label> <input id="address" value='' type="text"/><button id="search-button" onclick="search1();"> <em>Search your place </em></button></label>
         </div>
         </div>
         <div id="container">
         <div id= 'wiki' height='200'> 
-	<!--<form id="s-form">
-	<input type="text" style="width: 300px" />
-	<button type="button">Искать</button>
-	</form>-->
 	<div style="font-size: 12px; font-family: 'Arial'; width: 100%; border: 1px solid black; padding: 20px; overflow: scroll;" id="content"></div>
 	</div>
 	</div>
-     
-
-
-
         </div>
-        
     </body>
 </html
