@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<style type="text/css">
 		#title{
-		background-color: black;
+		background-color: gray;
 		text-align: center;
 		margin: 0px;
 		padding:0px;
@@ -57,16 +57,15 @@
             width: 610px;
             margin-top: 45px;
             margin-right: 10px;
-            background-color: black;
+            background-color:black;
         }
 	  #panel2 {
             position: absolute;
-            
-            margin-top: 50 px;
-            left:30%;
+            top: 70px;
+            /*left:30%;*/
             margin-left:10.5%;
             z-index: 5;
-            background-color: black;
+            background-color: #fdb301;
             padding: 5px;
             border: 1px solid #999;
             width:395px;
@@ -343,7 +342,7 @@
 	        
         </script>
 	 </script>
-		<div id="title"> <h1 style="color:white;float:center;display:inline-block;"> Discovery </h1><div>
+		<div id="title"> <h1 style = "color:white;float:center;display:inline-block;"> Discovery </h1><div>
         <body>
         <div id="bodyDOM">
     	<div id="map-canvas"></div>
@@ -355,16 +354,12 @@
         </div> -->
         <div id='header'> 
 	</div>
-	
-	<div id='panel2'> <h3 style="color:white;float:center;display:inline-block;"> DISCOVER YOUR PLACE </h3>
-	<div id='searchbar'> 
+	DISCOVER YOUR PLACE
+         <div id='searchbar'> 
 	<div id="buttons">
       	<label> <input id="address" value='' type="text"/><button id="search-button" onclick="search1();">search</button></label>
         </div>
         </div>
-	</div>
-	
-
         <div id="container">
         <div id= 'wiki' height='200'> 
 	<!--<form id="s-form">
@@ -379,7 +374,7 @@
         <button id="search-button"  onclick = "codeAddress();"> Search </button>
         </div> -->
         <div id="display">
-        <h2 style="color:white;float:center;display:inline-block;">VIDEOS</h3>
+        <h3 style="color:white;float:center;display:inline-block;">VIDEOS</h3>
         <pre id="response" ></pre>
         </div>
         </div>
