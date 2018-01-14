@@ -2,11 +2,10 @@
 <link rel="stylesheet" href="simplicityvote.css" type="text/css">
 <script src="http://reputablejournal.com/CS130/listsaver.js" type="text/javascript"> </script>
 <head>
-<title> Shopping Zone </title>
-<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4Ba9UpE0LHnvEPhglQhX7Vj95cF1daNz1UAuts82Q4sBaLEfs"> <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS44B2CW0Td1y6J0V8GAV8lTVPDnsyPZ7Xta0_os8M42yk7YPUk"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4-3gt1CgLbJrwfDX0R7IgfqGYkjA-RroXpXgUaCJYBJXq4FsEA"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRURZTn3sAguE9VYPJcgOBfjL18jdul8BwOTITis9okM_fstbeCag">
+<title> Simplicity Vote </title>
 <style>
 body {
-background-image:url(http://www.pptbackgrounds.net/uploads/happy-smiling-couple-with-shopping-powerpoint-backgrounds.jpg);
+background-image:url("http://www.powerpointhintergrund.com/download/bamboo-background-image-2024");
 }
 #meat {
 color: red;
@@ -26,8 +25,8 @@ text-decoration: line-through;
 </style>
 </head>
 <body>
-<h1> The Shopping List </h1>
-<table id="grocerylist"></table>
+<h1> Pick Your Favorite Fruit </h1>
+<table id="fruitlist"></table>
 <lable for="item"> Search your item: </lable>
 <input id="item" type="text"/>
 <lable> Types: </lable>
@@ -43,7 +42,7 @@ clickon= function(){
 myCategory=this.classname;
 }
 addItem= function() {
-myUL=document.querySelector('#grocerylist');
+myUL=document.querySelector('#fruitlist');
 myTextbox=document.querySelector('#item');
 myCategory = document.querySelector('#category').value;
 myli=document.createElement('li')
@@ -84,7 +83,7 @@ restoreList = function () {
 	allEntries = JSON.parse(localStorage.getItem('shoppingStorage'))
 	for (i=0; i < allEntries.length; i++){
 	
-	bl = document.querySelector("#grocerylist");
+	bl = document.querySelector("#fruitlist");
 	li = document.createElement('li');
 	cb= document.createElement("input");
 	cb.type = 'checkbox';
